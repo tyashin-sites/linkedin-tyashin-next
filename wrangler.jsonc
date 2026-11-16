@@ -9,10 +9,8 @@
     "binding": "ASSETS"
   },
   "kv_namespaces": [
-    // PLACEHOLDER — replace with the KV namespace id before the first deploy
-    // (`npx wrangler kv namespace create NEXT_INC_CACHE_KV`, or the platform's
-    // shared namespace). The binding name MUST stay NEXT_INC_CACHE_KV.
-    { "binding": "NEXT_INC_CACHE_KV", "id": "REPLACE_WITH_KV_ID" }
+    // Shared platform namespace (same id as yom-website-next and wonderlyar-next).
+    { "binding": "NEXT_INC_CACHE_KV", "id": "426d3a7563b14b9ab194d8495ae1c7ef" }
   ],
   // ISR revalidation queue (open-next.config.ts `queue: doQueue`).
   "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "site-linkedin-tyashin-next" }],
