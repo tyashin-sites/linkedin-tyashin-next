@@ -218,7 +218,7 @@ export default function HowItWorksPage() {
                 <span className="live-dot mt-2.5 flex-none" /> An email tells you when a post is live, and if one fails to publish.
               </li>
               <li className="flex gap-3">
-                <span className="live-dot mt-2.5 flex-none" /> One image you upload can be attached to a post.
+                <span className="live-dot mt-2.5 flex-none" /> A post can carry one image: a card designed from the post, a free-licensed photo, an AI illustration (labelled as AI-generated) or your own upload.
               </li>
               <li className="flex gap-3">
                 <span className="live-dot mt-2.5 flex-none" /> No browser automation, no auto-DMs, no engagement pods.

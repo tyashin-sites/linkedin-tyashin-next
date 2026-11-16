@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
   typescript: { ignoreBuildErrors: false },
   poweredByHeader: false,
   env: {
-    NEXT_PUBLIC_SITE_DOMAIN: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'linkedin.tyashin.com',
+    NEXT_PUBLIC_SITE_DOMAIN: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'linkedinautomation.tyashin.com',
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'https://linkedin.tyashin.com',
   },
   async redirects() {

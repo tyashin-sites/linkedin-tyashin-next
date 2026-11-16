@@ -172,12 +172,12 @@ export const featureGroups: FeatureGroup[] = [
       {
         title: 'Designed visual cards and sourced photos',
         body: 'Cards laid out from the post itself (comparisons, lists, timelines, stats, quotes) and free-licensed photos with attribution.',
-        status: 'soon',
+        status: 'live',
       },
       {
-        title: 'AI image generation and gallery',
-        body: 'Generated images for posts and a gallery to manage them.',
-        status: 'soon',
+        title: 'AI illustrations and gallery',
+        body: 'Turn on AI images in Settings and a post can get an editorial illustration drawn for it. Every one carries a visible AI-generated label, and they are all kept in your gallery.',
+        status: 'live',
       },
       {
         title: 'Carousels',

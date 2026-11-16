@@ -13,19 +13,9 @@ export const roadmap: { group: string; items: RoadmapItem[] }[] = [
     group: 'Formats and visuals',
     items: [
       {
-        title: 'Designed visual cards and sourced photos',
-        body: 'Cards laid out from the post itself, and free-licensed photos with attribution, attached to a post for you.',
-        today: 'You can attach one image you upload yourself.',
-      },
-      {
-        title: 'AI image generation and gallery',
-        body: 'Generated images for posts, with a gallery to keep and reuse them.',
-        today: 'Not available.',
-      },
-      {
         title: 'Carousels',
         body: 'Multi-slide posts designed from your content and published as a swipeable document.',
-        today: 'Posts are text, with one optional image.',
+        today: 'Posts are text with one image: a designed card, a sourced photo, an illustration or your own upload.',
       },
       {
         title: 'Video',

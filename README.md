@@ -37,7 +37,7 @@ Every variable is optional. With all of them unset the site builds and renders: 
 | `TYASHIN_API_KEY` | Server-only project key: blog, legal, contact, newsletter, grievance | Local blog posts and legal text; forms show "not available yet" |
 | `TYASHIN_API_URL` | Platform API base | `https://website-api.tyashin.com` |
 | `PROJECT_ID` | Tyashin project id (kept for the deploy workflow and future calls) | empty |
-| `NEXT_PUBLIC_SITE_DOMAIN` | Canonical host for canonicals, OG and JSON-LD | `linkedin.tyashin.com` |
+| `NEXT_PUBLIC_SITE_DOMAIN` | Canonical host for canonicals, OG and JSON-LD | `linkedinautomation.tyashin.com` |
 | `NEXT_PUBLIC_APP_URL` | Where `/signup/` and `/login/` live | `https://linkedin.tyashin.com` |
 | `TYASHIN_SLUG_HOST` | `https://<slug>.sites.tyashin.com`, for workers.dev rewrites of platform-owned paths | no rewrites |
 | `ROBOTS_NOINDEX` | `true` adds a noindex meta. Baked at **build** time for prerendered pages | indexable |
@@ -98,7 +98,7 @@ Before the first deploy
 - [ ] Replace `REPLACE_WITH_KV_ID` in `wrangler.jsonc` with the `NEXT_INC_CACHE_KV` namespace id.
 - [ ] Create the GitHub repo as **public**, push, run `/adopt`.
 - [ ] Set `TYASHIN_SLUG_HOST` once the project slug is known.
-- [ ] Decide where the app lives. This site's default domain and the app's default URL are both `linkedin.tyashin.com`. If the marketing site takes that host, the app's routes (`/signup/`, `/login/`, the dashboard, `/callback`) must keep resolving: either move the app to its own host and set `NEXT_PUBLIC_APP_URL`, or keep path-level routing in front of both. Decide before DNS changes; LinkedIn OAuth redirect URLs depend on it.
+- [x] Domains (decided 2026-11-16): the app stays on `linkedin.tyashin.com` untouched (LinkedIn OAuth, Stripe and Razorpay return URLs unchanged). This site lives on its own host, `linkedinautomation.tyashin.com`. One host only: several keyword subdomains serving the same pages would be duplicate content and split ranking signals.
 
 On the preview host
 

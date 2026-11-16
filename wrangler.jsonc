@@ -25,7 +25,7 @@
     // Indexing switch. "true" until cutover. Prerendered pages bake this at
     // BUILD time, so export ROBOTS_NOINDEX in the build env too and rebuild.
     "ROBOTS_NOINDEX": "true",
-    "NEXT_PUBLIC_SITE_DOMAIN": "linkedin.tyashin.com"
+    "NEXT_PUBLIC_SITE_DOMAIN": "linkedinautomation.tyashin.com"
   }
   // Secrets (set by the platform's deploy workflow, never committed):
   //   TYASHIN_API_KEY, PROJECT_ID

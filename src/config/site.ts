@@ -4,7 +4,7 @@ import { LOGIN_URL, SIGNUP_URL } from '@/lib/app-links';
  * ONE place for every brand string. Facts and where they came from:
  * docs/CONTENT-SOURCES.md.
  */
-const domain = (process.env.NEXT_PUBLIC_SITE_DOMAIN || 'linkedin.tyashin.com').replace(/^https?:\/\//, '').replace(/\/+$/, '');
+const domain = (process.env.NEXT_PUBLIC_SITE_DOMAIN || 'linkedinautomation.tyashin.com').replace(/^https?:\/\//, '').replace(/\/+$/, '');
 
 export const siteConfig = {
   name: 'Tyashin for LinkedIn',

@@ -9,7 +9,7 @@ import { ComingSoonPanel } from '@/components/ComingSoon';
 
 const TITLE = 'Roadmap';
 const DESCRIPTION =
-  'What is not live yet in Tyashin for LinkedIn: company pages, carousels, visual cards and photos, AI images, video, analytics and more. Listed honestly, with what you can do today instead.';
+  'What is not live yet in Tyashin for LinkedIn: company pages, carousels, video, analytics and more. Listed honestly, with what you can do today instead.';
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: '/roadmap' });
 
 export default function RoadmapPage() {

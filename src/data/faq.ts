@@ -66,7 +66,7 @@ export const faqGroups: { heading: string; items: FaqItem[] }[] = [
       },
       {
         q: 'Can it post images, carousels or video?',
-        a: 'You can attach one image you upload. Designed visual cards, sourced photos, AI-generated images, carousels and video are coming soon and are listed on the roadmap.',
+        a: 'Yes, one image per post. It can be a card designed from the post itself, a free-licensed photo with attribution, an AI illustration (always labelled as AI-generated) or an image you upload. Carousels and video are coming soon and are listed on the roadmap.',
       },
       {
         q: 'Can it post to my company page?',
