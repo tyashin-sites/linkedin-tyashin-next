@@ -1,0 +1,501 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Tyashin for LinkedIn — design tokens. Light, editorial, one accent (the
+ * teal of the logo). Colour values live once in layout.tsx (html:root) so a
+ * platform-injected brand kit can never win by order; everything else here.
+ */
+:root {
+  color-scheme: light;
+  --brand-heading-font: var(--font-display), Georgia, serif;
+  --brand-body-font: var(--font-body), system-ui, sans-serif;
+  --brand-mono-font: var(--font-mono), ui-monospace, monospace;
+  --ease-brand: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --dur-micro: 140ms;
+  --dur-ui: 240ms;
+  --dur-reveal: 620ms;
+  --shadow-rest: 0 1px 2px color-mix(in srgb, var(--brand-primary-deep) 7%, transparent),
+    0 8px 24px -12px color-mix(in srgb, var(--brand-primary-deep) 16%, transparent);
+  --shadow-hover: 0 2px 4px color-mix(in srgb, var(--brand-primary-deep) 9%, transparent),
+    0 18px 40px -16px color-mix(in srgb, var(--brand-primary-deep) 26%, transparent);
+  --on-ink: #f3f7f5;
+  --on-ink-muted: #a9bdb7;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    font-family: var(--brand-body-font);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--brand-primary);
+    color: #fff;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Focus ring: unlayered so no utility can remove it. */
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.ink-band :focus-visible {
+  outline-color: #fff;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--brand-ink);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+@layer components {
+  .container-y {
+    width: 100%;
+    max-width: 74rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.15rem, 4vw, 2.5rem);
+  }
+  .section {
+    padding-block: clamp(4rem, 9vw, 7.5rem);
+  }
+  .section-tight {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  /* Type tiers: big type is light (400 serif), hierarchy by size and space. */
+  .tt-display {
+    font-family: var(--brand-heading-font);
+    font-weight: 400;
+    font-size: clamp(2.65rem, 6.4vw, 5rem);
+    line-height: 1.03;
+    letter-spacing: -0.022em;
+  }
+  .tt-h1 {
+    font-family: var(--brand-heading-font);
+    font-weight: 400;
+    font-size: clamp(2.3rem, 5vw, 3.9rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+  }
+  .tt-h2 {
+    font-family: var(--brand-heading-font);
+    font-weight: 400;
+    font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+  .tt-h3 {
+    font-family: var(--brand-body-font);
+    font-weight: 600;
+    font-size: 1.14rem;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+  }
+  .tt-lead {
+    font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--brand-text-muted);
+  }
+  .tt-num {
+    font-family: var(--brand-mono-font);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand-primary);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 1.6rem;
+    height: 1px;
+    background: linear-gradient(90deg, var(--brand-primary), transparent);
+  }
+  .ink-band .eyebrow {
+    color: #7fd4c1;
+  }
+  .ink-band .eyebrow::before {
+    background: linear-gradient(90deg, #7fd4c1, transparent);
+  }
+  .accent-word {
+    font-style: italic;
+    color: var(--brand-primary);
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--brand-border) 12%, var(--brand-border) 88%, transparent);
+  }
+  .rule-top {
+    border-top: 1px solid var(--brand-border);
+  }
+
+  /* Surfaces */
+  .card {
+    position: relative;
+    background: var(--brand-paper);
+    border: 1px solid var(--brand-border);
+    border-radius: var(--brand-radius-lg);
+    box-shadow: var(--shadow-rest);
+  }
+  a.card,
+  .card-link {
+    transition: box-shadow var(--dur-ui) var(--ease-brand), transform var(--dur-ui) var(--ease-brand),
+      border-color var(--dur-ui) var(--ease-brand);
+  }
+  a.card:hover,
+  .card-link:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--brand-primary) 38%, var(--brand-border));
+  }
+  .tint-band {
+    background: var(--brand-surface);
+  }
+  .ink-band {
+    background: radial-gradient(120% 140% at 12% 0%, #12423b 0%, var(--brand-ink) 58%);
+    color: var(--on-ink);
+  }
+  .ink-band .tt-lead,
+  .ink-band .text-muted {
+    color: var(--on-ink-muted);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.9rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    line-height: 1.2;
+    text-align: center;
+    transition: transform var(--dur-micro) var(--ease-brand), background-color var(--dur-ui) var(--ease-brand),
+      box-shadow var(--dur-ui) var(--ease-brand), border-color var(--dur-ui) var(--ease-brand);
+  }
+  .btn-primary {
+    background: var(--brand-primary);
+    color: var(--brand-primary-contrast);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 6px 18px -8px color-mix(in srgb, var(--brand-primary-deep) 70%, transparent);
+  }
+  .btn-primary:hover {
+    background: var(--brand-primary-deep);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    border: 1px solid color-mix(in srgb, var(--brand-ink) 22%, transparent);
+    color: var(--brand-text);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--brand-ink);
+    background: color-mix(in srgb, var(--brand-ink) 4%, transparent);
+  }
+  .btn-sm {
+    min-height: 2.5rem;
+    padding: 0.5rem 1.05rem;
+    font-size: 0.92rem;
+  }
+  .ink-band .btn-primary {
+    background: #fff;
+    color: var(--brand-ink);
+    box-shadow: none;
+  }
+  .ink-band .btn-primary:hover {
+    background: #e3f1ed;
+  }
+  .ink-band .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+  }
+  .ink-band .btn-ghost:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: var(--brand-primary-deep);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--brand-primary) 35%, transparent);
+    text-underline-offset: 0.28em;
+  }
+  .link-arrow:hover {
+    text-decoration-color: var(--brand-primary);
+  }
+  .ink-band .link-arrow {
+    color: #bfe9de;
+  }
+
+  /* Coming soon — ONE treatment, used everywhere. */
+  .soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px dashed color-mix(in srgb, var(--brand-spark) 70%, transparent);
+    background: color-mix(in srgb, var(--brand-spark) 9%, var(--brand-paper));
+    color: var(--brand-spark);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .soon-panel {
+    border: 1px dashed color-mix(in srgb, var(--brand-spark) 55%, transparent);
+    background: color-mix(in srgb, var(--brand-spark) 5%, var(--brand-paper));
+    border-radius: var(--brand-radius-lg);
+  }
+  .live-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--brand-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-primary) 18%, transparent);
+  }
+
+  /* Forms */
+  .field {
+    margin-top: 0.5rem;
+    width: 100%;
+    border-radius: var(--brand-radius-md);
+    border: 1px solid color-mix(in srgb, var(--brand-ink) 24%, transparent);
+    background: #fff;
+    padding: 0.75rem 0.9rem;
+    font-size: 1rem;
+    color: var(--brand-text);
+  }
+  .field:focus {
+    border-color: var(--brand-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-primary) 22%, transparent);
+  }
+
+  /* Long-form text: legal pages and blog posts. */
+  .prose-y {
+    font-size: 1.06rem;
+    line-height: 1.75;
+    color: var(--brand-text);
+    overflow-wrap: break-word;
+  }
+  .prose-y > * + * {
+    margin-top: 1.15em;
+  }
+  .prose-y h2 {
+    font-family: var(--brand-heading-font);
+    font-weight: 400;
+    font-size: 1.85rem;
+    line-height: 1.15;
+    letter-spacing: -0.012em;
+    margin-top: 2.2em;
+  }
+  .prose-y h3 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    margin-top: 1.8em;
+  }
+  .prose-y a {
+    color: var(--brand-primary-deep);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .prose-y ul,
+  .prose-y ol {
+    padding-left: 1.3em;
+  }
+  .prose-y ul {
+    list-style: disc;
+  }
+  .prose-y ol {
+    list-style: decimal;
+  }
+  .prose-y li + li {
+    margin-top: 0.45em;
+  }
+  .prose-y blockquote {
+    border-left: 2px solid var(--brand-primary);
+    padding-left: 1.2rem;
+    font-family: var(--brand-heading-font);
+    font-size: 1.35rem;
+    line-height: 1.4;
+  }
+  .prose-y img {
+    border-radius: var(--brand-radius-lg);
+    max-width: 100%;
+    height: auto;
+  }
+  .prose-y code {
+    font-family: var(--brand-mono-font);
+    font-size: 0.9em;
+    background: var(--brand-surface);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  .prose-y table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+  .prose-y th,
+  .prose-y td {
+    border: 1px solid var(--brand-border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--brand-bg) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(14px);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-ui) var(--ease-brand), box-shadow var(--dur-ui) var(--ease-brand);
+  }
+  .site-header.is-scrolled {
+    border-bottom-color: var(--brand-border);
+    box-shadow: 0 10px 30px -22px color-mix(in srgb, var(--brand-primary-deep) 45%, transparent);
+  }
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.96rem;
+    font-weight: 500;
+    color: var(--brand-text);
+  }
+  .nav-link:hover,
+  .nav-link[aria-current='page'] {
+    color: var(--brand-primary-deep);
+    background: color-mix(in srgb, var(--brand-primary) 8%, transparent);
+  }
+
+  /* Hero product mock */
+  .mock-window {
+    background: #fff;
+    border: 1px solid var(--brand-border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-hover);
+  }
+  .mock-label {
+    font-family: var(--brand-mono-font);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-text-muted);
+  }
+  .mock-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--brand-border);
+    background: var(--brand-bg);
+    padding: 0.18rem 0.55rem;
+    font-size: 0.74rem;
+    color: var(--brand-text);
+    white-space: nowrap;
+  }
+  .mock-check {
+    display: inline-flex;
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--brand-primary);
+    color: #fff;
+  }
+  .flow-arrow {
+    color: color-mix(in srgb, var(--brand-primary) 55%, transparent);
+  }
+
+  /* Entrances: content is visible by default; .rv only adds a settle when JS
+     has marked the document ready AND the visitor accepts motion. */
+  html.motion-ok .rv {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity var(--dur-reveal) var(--ease-brand), transform var(--dur-reveal) var(--ease-brand);
+  }
+  html.motion-ok .rv.in {
+    opacity: 1;
+    transform: none;
+  }
+  @keyframes tick-in {
+    from {
+      transform: scale(0.4);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  .tick {
+    animation: tick-in 420ms var(--ease-brand) both;
+  }
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand-primary) 40%, transparent);
+    }
+    100% {
+      box-shadow: 0 0 0 10px transparent;
+    }
+  }
+  .pulse {
+    animation: pulse-ring 2.4s var(--ease-brand) infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
