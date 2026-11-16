@@ -1,0 +1,8 @@
+{
+  "framework": "nextjs",
+  "projectSlug": "linkedin-tyashin-next",
+  "workerScriptName": "site-linkedin-tyashin-next",
+  "pages": ["/", "/how-it-works", "/features", "/use-cases", "/use-cases/[slug]", "/pricing", "/safety", "/roadmap", "/faq", "/blog", "/blog/[slug]", "/contact", "/about", "/privacy-policy", "/terms-and-conditions", "/sales-terms", "/grievance"],
+  "routeHandlers": ["/sitemap-pages.xml", "/llms.txt", "/api/contact", "/api/newsletter", "/api/grievance", "/api/geo"],
+  "tyashinOwnedRoutes": ["/brand-kit.css", "/tyashin-runtime.js", "/sitemap.xml", "/robots.txt", "/blog/rss.xml"]
+}
