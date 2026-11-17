@@ -37,7 +37,9 @@ function walk(dir, out = []) {
 const sitemap = await (await fetch(`${base}/sitemap-pages.xml`)).text();
 const origin = new URL(base).origin;
 const sitemapPaths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
-if (!sitemap.includes(`<loc>${origin}`)) fail(`sitemap origin is not the request origin (${origin})`);
+const canonicalOrigin = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN || 'linkedinautomation.tyashin.com'}`;
+const locOrigins = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).origin));
+if (locOrigins.size !== 1 || !locOrigins.has(canonicalOrigin)) fail(`sitemap origin is not the canonical origin ${canonicalOrigin}: ${[...locOrigins].join(', ')}`);
 const appDir = join(root, 'src/app');
 const pageRoutes = walk(appDir)
   .filter((f) => f.endsWith('/page.tsx'))

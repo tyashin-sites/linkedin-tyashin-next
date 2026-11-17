@@ -8,8 +8,9 @@ import { listPosts } from '@/lib/blog';
  * /sitemap-content.xml (platform blog posts). Never app/sitemap.ts: the
  * platform owns /sitemap.xml.
  *
- * Origin comes from the request (X-Forwarded-Host / Host), so it is right on
- * the slug host, workers.dev and the production domain alike.
+ * Every <loc> uses the canonical origin (SITE.url), never the request host:
+ * behind the platform the Worker sees its workers.dev host, and a sitemap
+ * must list canonical URLs only.
  *
  * Blog posts: platform posts live in the platform's content sitemap. The
  * local fallback posts are in no platform sitemap, so they are listed here,
@@ -20,15 +21,8 @@ export const dynamic = 'force-dynamic';
 const esc = (v: string) =>
   v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 
-function originOf(request: Request): string {
-  const host = (request.headers.get('x-forwarded-host') || request.headers.get('host') || '').split(',')[0].trim();
-  if (!host || !/^[a-z0-9.-]+(:\d+)?$/i.test(host)) return SITE.url;
-  const local = /^(localhost|127\.0\.0\.1)(:\d+)?$/.test(host);
-  return `${local ? 'http' : 'https'}://${host}`;
-}
-
-export async function GET(request: Request): Promise<Response> {
-  const origin = originOf(request);
+export async function GET(): Promise<Response> {
+  const origin = SITE.url.replace(/\/+$/, '');
   const abs = (path: string) => `${origin}${path === '/' ? '' : path}`;
   const entries = getSiteRoutes().map((r) => ({ loc: abs(r.path), freq: r.changeFrequency as string, pri: r.priority }));
 
