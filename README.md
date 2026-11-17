@@ -95,8 +95,8 @@ A manual deploy, when needed: `npx @opennextjs/cloudflare build && npx @opennext
 
 Before the first deploy
 
-- [ ] Replace `REPLACE_WITH_KV_ID` in `wrangler.jsonc` with the `NEXT_INC_CACHE_KV` namespace id.
-- [ ] Create the GitHub repo as **public**, push, run `/adopt`.
+- [x] Replace `REPLACE_WITH_KV_ID` in `wrangler.jsonc` with the `NEXT_INC_CACHE_KV` namespace id.
+- [x] Create the GitHub repo as **public**, push, run `/adopt`.
 - [ ] Set `TYASHIN_SLUG_HOST` once the project slug is known.
 - [x] Domains (decided 2026-11-16): the app stays on `linkedin.tyashin.com` untouched (LinkedIn OAuth, Stripe and Razorpay return URLs unchanged). This site lives on its own host, `linkedinautomation.tyashin.com`. One host only: several keyword subdomains serving the same pages would be duplicate content and split ranking signals.
 
@@ -111,8 +111,8 @@ On the preview host
 
 Going live
 
-- [ ] Build with `ROBOTS_NOINDEX=false` and set the same in `wrangler.jsonc`, then redeploy.
-- [ ] Set `NEXT_PUBLIC_SITE_DOMAIN` to the production host at build time.
+- [x] Build with `ROBOTS_NOINDEX=false` and set the same in `wrangler.jsonc`, then redeploy.
+- [x] Set `NEXT_PUBLIC_SITE_DOMAIN` to the production host at build time.
 - [ ] Verify the live `<head>` has no noindex: `node -e "fetch('https://<domain>/').then(r=>r.text()).then(t=>console.log(t.slice(0,t.indexOf('</head>')).match(/<meta[^>]*(robots|googlebot)[^>]*>/gi)))"` should print `null`.
 - [ ] Confirm `x-tyashin-dispatch: nextjs` on the production host.
 - [ ] Check the old site's URLs redirect: `/privacy`, `/terms`, `/whats-coming`, `/automation`, `/compare`.
