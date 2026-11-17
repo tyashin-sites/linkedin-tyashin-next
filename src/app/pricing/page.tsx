@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { pageMetadata } from '@/lib/seo';
-import { PLAN, REGIONAL_PRICES, TOP_UP_LABELS } from '@/lib/pricing';
+import { PLAN } from '@/lib/pricing';
 import { faqGroups } from '@/data/faq';
 import { JsonLd } from '@/components/JsonLd';
 import { PageHero, SectionHead } from '@/components/PageHero';
 import { CtaBand, PrimaryCta } from '@/components/Cta';
 import { ComingSoonPanel } from '@/components/ComingSoon';
 import { FaqList } from '@/components/FaqList';
-import { PriceHint } from '@/components/PriceHint';
+import { PlanPrice, PriceNote, TopUpPrices } from '@/components/RegionalPrice';
 
 const TITLE = 'Pricing';
-const DESCRIPTION = `One plan: Personal, US$${PLAN.usdMonthly} a month for one LinkedIn profile. Write ${PLAN.freePosts} posts free with no card, then a ${PLAN.trialDays}-day free trial, then monthly. Regional prices listed.`;
+const DESCRIPTION = `One plan: Personal, US$${PLAN.usdMonthly} a month for one LinkedIn profile. Write ${PLAN.freePosts} posts free with no card, then a ${PLAN.trialDays}-day free trial, then monthly. The page shows the price in your currency.`;
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: '/pricing' });
 
 const INCLUDED = [
@@ -47,10 +47,10 @@ export default function PricingPage() {
               <span className="text-muted">For {PLAN.profiles} LinkedIn profile</span>
             </div>
             <p className="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="tt-num text-[clamp(3rem,9vw,4.6rem)] leading-none">US${PLAN.usdMonthly}</span>
+              <PlanPrice className="tt-num text-[clamp(3rem,9vw,4.6rem)] leading-none" />
               <span className="text-[1.05rem] text-muted">per month</span>
             </p>
-            <PriceHint />
+            <PriceNote />
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <PrimaryCta />
               <span className="text-[0.92rem] text-muted">No card for your first {PLAN.freePosts} posts.</span>
@@ -99,42 +99,14 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="tint-band" aria-labelledby="regional-h">
+      <section className="tint-band" aria-labelledby="allowance-h">
         <div className="container-y section-tight">
           <SectionHead
-            id="regional-h"
-            eyebrow="Regional prices"
-            title="What you pay where you are"
-            lead="The same plan, priced in your currency. The price at checkout is the one that counts; if this table and checkout ever disagree, checkout is right."
+            id="allowance-h"
+            eyebrow="Allowance and payment"
+            title="What the plan covers, and how you pay"
           />
-          <div className="mt-10 overflow-x-auto">
-            <table className="w-full min-w-[40rem] border-collapse text-left text-[0.98rem]">
-              <caption className="sr-only">Personal plan price and allowance top-ups by region</caption>
-              <thead>
-                <tr className="border-b border-border text-[0.74rem] uppercase tracking-[0.12em] text-muted">
-                  <th scope="col" className="py-3 pr-5 font-semibold">Region</th>
-                  <th scope="col" className="py-3 pr-5 font-semibold">Personal / month</th>
-                  {TOP_UP_LABELS.map((l) => (
-                    <th key={l} scope="col" className="py-3 pr-5 font-semibold">{l}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {REGIONAL_PRICES.map((r) => (
-                  <tr key={r.currency} className="border-b border-border">
-                    <th scope="row" className="py-4 pr-5 font-medium">
-                      {r.region} <span className="text-muted">({r.code})</span>
-                    </th>
-                    <td className="tt-num py-4 pr-5 text-[1.05rem]">{r.personal}</td>
-                    {r.topUps.map((t, i) => (
-                      <td key={i} className="tt-num py-4 pr-5 text-muted">{t}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-10 md:grid-cols-2">
             <div>
               <h3 className="tt-h3">The monthly AI allowance</h3>
               <p className="mt-2 text-muted">
@@ -142,11 +114,14 @@ export default function PricingPage() {
                 much of it you have used as a percentage. If you need more in a given month, buy a one-off top-up of
                 20%, 50% or 100% of the allowance.
               </p>
+              <TopUpPrices />
             </div>
             <div>
               <h3 className="tt-h3">How you pay</h3>
               <p className="mt-2 text-muted">
-                Customers in India pay in rupees through Razorpay. Everyone else pays by card through Stripe.
+                The price on this page is in the currency for the country you are visiting from. Once you have an
+                account, the app bills in the currency for the country the account was created in. Customers in India
+                pay in rupees through Razorpay. Everyone else pays by card through Stripe.
               </p>
             </div>
           </div>

@@ -97,7 +97,7 @@ export const faqGroups: { heading: string; items: FaqItem[] }[] = [
     items: [
       {
         q: 'What does it cost?',
-        a: 'One plan, Personal: US$145 a month for one LinkedIn profile. Regional prices apply in India, the Eurozone, Canada, Australia and New Zealand, Japan, the Gulf states and Kuwait, and are listed on the pricing page.',
+        a: 'One plan, Personal: US$145 a month for one LinkedIn profile. Regional prices apply in India, the Eurozone, Canada, Australia and New Zealand, Japan, the Gulf states and Kuwait, and the pricing page shows the price for the country you are visiting from.',
         home: true,
       },
       {

@@ -12,7 +12,7 @@ import { CtaBand, GhostLink, PrimaryCta } from '@/components/Cta';
 import { SectionHead } from '@/components/PageHero';
 import { FaqList } from '@/components/FaqList';
 import { ComingSoonBadge } from '@/components/ComingSoon';
-import { PriceHint } from '@/components/PriceHint';
+import { PlanPrice, PriceNote } from '@/components/RegionalPrice';
 
 const DESCRIPTION =
   'Sound like yourself on LinkedIn every week without writing every post. Tyashin drafts in your voice, checks each draft, and publishes through LinkedIn’s official API once you approve. Write 2 posts free, no card.';
@@ -289,7 +289,7 @@ export default function HomePage() {
             />
             <p className="mt-8">
               <Link href="/pricing" className="link-arrow">
-                Full pricing and regional prices
+                Full pricing
               </Link>
             </p>
           </div>
@@ -299,10 +299,10 @@ export default function HomePage() {
               <span className="text-[0.86rem] text-muted">{PLAN.profiles} LinkedIn profile</span>
             </div>
             <p className="mt-5 flex items-baseline gap-2">
-              <span className="tt-num text-[3.4rem] leading-none">US${PLAN.usdMonthly}</span>
+              <PlanPrice className="tt-num text-[3.4rem] leading-none" />
               <span className="text-muted">/ month</span>
             </p>
-            <PriceHint />
+            <PriceNote />
             <ul className="mt-6 space-y-2 text-[0.97rem]">
               <li>First {PLAN.freePosts} posts free, no card</li>
               <li>Then a {PLAN.trialDays}-day free trial (card required)</li>
