@@ -102,12 +102,12 @@ Before the first deploy
 
 On the preview host
 
-- [ ] Install and configure plugins: Contact Form, Newsletter, Blog, SEO Co-Pilot, analytics. Nothing customer-facing is on by default.
-- [ ] Set blog ownership to `storefront` if `/adopt` did not (`PATCH /projects/<id>/tyashin-pages` with `blog-index` and `blog-post`). Check `/blog` shows this site's header and footer.
+- [x] Install and configure plugins: Contact Form, Newsletter, Blog, SEO Co-Pilot (done 2026-11-17; project `6afbd1cd3055a809e4830f22`, slug `linkedin-website-mwk621du`). Analytics is not installed yet.
+- [x] Set blog ownership to `storefront` if `/adopt` did not (`PATCH /projects/<id>/tyashin-pages` with `blog-index` and `blog-post`). Check `/blog` shows this site's header and footer.
 - [ ] Add the three legal pages in the platform with slugs `privacy-policy`, `terms-and-conditions`, `sales-terms`, or keep the local fallback.
 - [ ] Submit the contact, newsletter and grievance forms once each and confirm they arrive.
-- [ ] Keep "Serve /llms.txt" off in SEO Co-Pilot if this site's `/llms.txt` should be the one served.
-- [ ] `node scripts/check-site.mjs <preview-url>` passes.
+- [x] Keep "Serve /llms.txt" off in SEO Co-Pilot if this site's `/llms.txt` should be the one served.
+- [x] `node scripts/check-site.mjs <preview-url>` passes.
 
 Going live
 
