@@ -1,7 +1,7 @@
 import { siteConfig } from '@/config/site';
 import { siteUrl } from '@/lib/seo';
 import { getSiteRoutes } from '@/lib/site-routes';
-import { PLAN, REGIONAL_PRICES } from '@/lib/pricing';
+import { PLAN } from '@/lib/pricing';
 import { featureGroups, formatThemes, neverList, strategyThemes } from '@/data/features';
 import { roadmap } from '@/data/roadmap';
 import { LOGIN_URL, SIGNUP_URL } from '@/lib/app-links';
@@ -25,7 +25,6 @@ export function GET() {
     .flatMap((g) => g.items)
     .map((i) => `- ${i.title}. Today: ${i.today}`)
     .join('\n');
-  const regional = REGIONAL_PRICES.map((r) => `- ${r.region}: ${r.personal} per month (${r.code})`).join('\n');
   const pages = getSiteRoutes()
     .map((r) => `- ${r.title}: ${siteUrl(r.path)}`)
     .join('\n');
@@ -56,9 +55,7 @@ export function GET() {
     `- Offer: the first ${PLAN.freePosts} posts are free with no card. Then a ${PLAN.trialDays}-day free trial (card required, not charged until it ends). Then billed monthly. Cancel anytime.`,
     '- The plan includes a monthly AI allowance; one-off top-ups of 20%, 50% or 100% are available.',
     '- Company page add-on: coming soon, not purchasable.',
-    '',
-    'Regional prices:',
-    regional,
+    '- Currency: the pricing page shows the price in the currency for the country the visitor is in. Signed-in customers are billed in the currency for the country their account was created in. Checkout confirms the price before payment.',
     '',
     '## Pages',
     pages,
