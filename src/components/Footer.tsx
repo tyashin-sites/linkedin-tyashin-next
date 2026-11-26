@@ -100,6 +100,12 @@ export function Footer({ recentPosts }: { recentPosts: Pick<BlogPost, 'slug' | '
             <a href="/llms.txt" className="hover:text-white hover:underline">
               llms.txt
             </a>
+            {/* The platform's consent banner (consent.js) reopens on any
+                data-tyashin-consent-open click; without it the link opens
+                the platform-served /consent-center page. */}
+            <a href="/consent-center" data-tyashin-consent-open rel="nofollow" className="hover:text-white hover:underline">
+              Cookie settings
+            </a>
           </p>
         </div>
         <p className="mt-6 text-center text-[0.82rem] text-on-ink-muted">

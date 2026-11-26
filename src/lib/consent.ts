@@ -5,7 +5,8 @@
  * It mirrors the platform's own gate in the edge-injected analytics.js
  * (`tyMayStore`) so the site and the platform never disagree about the same
  * visitor. Precedence, first answer wins:
- *   1. `aapas_consent` in localStorage (platform consent-manager choice)
+ *   1. `aapas_consent` in localStorage (platform consent-manager choice),
+ *      then the `tyashin_consent` cookie (choice saved on /consent-center)
  *   2. the last `yom:consent` event (YOM Consent SDK purposes)
  *   3. the last Google Consent Mode `update` in `dataLayer`
  *   4. Global Privacy Control on → no
@@ -34,6 +35,19 @@ function gcmUpdate(key: string): boolean | null {
   return result;
 }
 
+/** The platform's /consent-center page saves `tyashin_consent` (URL-encoded JSON). */
+function consentCenterChoice(purpose: ConsentPurpose): boolean | null {
+  try {
+    const m = document.cookie.match(/(?:^|;\s*)tyashin_consent=([^;]*)/);
+    if (!m) return null;
+    const c = JSON.parse(decodeURIComponent(m[1])) as Record<string, unknown>;
+    const v = c[purpose === 'preferences' ? 'personalization' : 'analytics'];
+    return typeof v === 'boolean' ? v : null;
+  } catch {
+    return null;
+  }
+}
+
 export function mayStore(purpose: ConsentPurpose): boolean {
   if (typeof window === 'undefined') return false;
   try {
@@ -42,6 +56,8 @@ export function mayStore(purpose: ConsentPurpose): boolean {
   } catch {
     // Storage blocked (private mode, site data cleared) — fall through.
   }
+  const cc = consentCenterChoice(purpose);
+  if (cc !== null) return cc;
   if (yomPurposes) {
     const y = yomPurposes[purpose === 'preferences' ? 'personalisation' : 'analytics'];
     if (y === 'granted') return true;

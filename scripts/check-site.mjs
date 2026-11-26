@@ -56,6 +56,8 @@ console.log(`coverage: ${pageRoutes.length} page.tsx files, ${sitemapPaths.lengt
 
 // 2 + 3. Fetch + crawl
 const seen = new Map();
+// Served by the Tyashin platform at the edge, not by this build.
+const PLATFORM_OWNED = new Set(['/consent-center']);
 const queue = [...new Set([...sitemapPaths, '/llms.txt', '/privacy', '/terms'])];
 const sources = new Map();
 while (queue.length) {
@@ -75,6 +77,7 @@ while (queue.length) {
     if (href.startsWith('#') || /^(mailto:|tel:|https?:\/\/|\/\/)/.test(href)) continue;
     if (href.startsWith('/_next/') || /\.(css|js|woff2|png|svg|ico)(\?|$)/.test(href)) continue;
     href = href.split('#')[0];
+    if (PLATFORM_OWNED.has(href)) continue;
     if (!href || seen.has(href) || queue.includes(href)) continue;
     sources.set(href, path);
     queue.push(href);

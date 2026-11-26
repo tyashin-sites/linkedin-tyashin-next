@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // Short legal slugs and the old marketing site's URLs.
+      // Browsers and crawlers still ask for /favicon.ico; the real icon is the PNG mark.
+      { source: '/favicon.ico', destination: '/brand/logo-icon.png', permanent: true },
       { source: '/privacy', destination: '/privacy-policy', permanent: true },
       { source: '/terms', destination: '/terms-and-conditions', permanent: true },
       { source: '/whats-coming', destination: '/roadmap', permanent: true },
